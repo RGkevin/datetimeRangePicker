@@ -1,0 +1,182 @@
+/* jrg-eRangePicker */
+@import url('bower_components/bootstrap/less/variables.less');
+@import url('bower_components/bootstrap/less/mixins.less');
+
+@well-bg: #fff;
+@maxWidth: 615px;
+
+.rg-range-picker {
+  max-width: @maxWidth;
+
+
+  .rg-range-picker-box {
+    width: 100%;
+    padding: 0;
+    background-color: @well-bg;
+
+  }
+
+  .rg-range-picker-calendars {
+    border-bottom: solid 1px darken(@well-bg, 7%);
+
+    .clearfix();
+
+    .rg-range-picker-calendar-box {
+      float: left;
+      width: 50%;
+      border-right: solid 1px darken(@well-bg, 7%);
+      text-align: center;
+
+      &.right,
+      &:last-child {
+        border-right-width: 0;
+        margin-left: -1px;
+      }
+    }
+
+    .rg-range-picker-calendar-label {
+      margin-bottom: @font-size-base;
+      margin-top: @font-size-base;
+      color: darken(@well-bg, 40%);
+      font-weight: 200;
+    }
+
+  }
+}
+
+// calendars style
+.clean-calendar {
+
+  > table {
+    width: 100%;
+    
+    thead {
+      
+      tr {
+        
+        &:first-child {
+          background-color: #EAF5FC;
+
+        }
+
+        th {
+
+          .btn {
+            background-color: transparent !important;
+          }
+        }
+      }
+    }
+  }
+
+  .btn {
+    border-width: 0;
+
+    &,
+    &:hover,
+    &:focus,
+    &:active {
+      //background-color: transparent;
+      outline: none !important;
+
+      .box-shadow(none);
+    }
+  }
+}
+
+.ng-range-picker-slider {
+  padding: 15px;
+  position: relative;
+  min-height: 30px;
+
+  .ng-range-picker-slider-labels {
+    margin-bottom: @font-size-base;
+  }
+}
+
+.label.label-range-picker {
+  border: solid 1px darken(@well-bg, 7%);
+  background-color: @well-bg;
+  color: darken(@well-bg, 60%);
+  font-weight: 300;
+  border-radius: @font-size-base;
+  font-size: @font-size-base;
+}
+
+.clean-slider {
+  position: relative;
+  overflow: hidden;
+  height: @line-height-computed;
+  margin-bottom: @line-height-computed;
+
+  .bar {
+    .box-shadow(inset 0 1px 2px rgba(0,0,0,.1));
+
+
+    &.full {
+      height: @line-height-computed;
+      background-color: lighten(@brand-warning, 10%);
+      border-radius: @line-height-computed / 2;
+
+    }
+
+    &.selection {
+      background-color: darken(@brand-warning, 5%);
+      height: 100%;
+      border-radius: @line-height-computed / 2;
+    }
+  }
+
+  .bubble {
+
+    &.low,
+    &.high {
+      background-color: @well-bg;
+      width: @line-height-computed;
+      height: @line-height-computed;
+      text-indent: -999px;
+      overflow: hidden;
+      border-radius: 50%;
+      position: relative;
+      cursor: pointer;
+
+      &:after {
+        content: ' ';
+        background-color: @brand-warning;
+        width: @line-height-computed - 8;
+        height: @line-height-computed - 8;
+        position: absolute;
+        display: block;
+        top: 50%;
+        left: 50%;
+        margin-top: (@line-height-computed / -4) - 1;
+        margin-left: (@line-height-computed / -4) - 1;
+        border-radius: 50%;
+      }
+    }
+
+    &.selection {
+      color: @well-bg;
+    }
+
+    &.limit {
+
+      &.floor,
+      &.ceiling {
+        text-indent: -999px;
+      }
+    }
+  }
+
+  .input {
+
+    &.low,
+    &.high {
+      cursor: ew-resize;
+    }
+
+    &.selection {
+      cursor: all-scroll;
+    }
+  }
+}

@@ -1,3 +1,20 @@
-<div ng-controller='HomeCtrl'>	
+<div ng-controller='HomeCtrl'>
 	<!-- TODO: place directive call here -->
+	<div class="jumbotron">
+		<h1>Datetime Range Picker</h1>
+		<p>An <a href="http://www.angularjs.org">angular</a> directive for pick a range of dates and time (schedule). It requires <a href="http://angular-ui.github.io/bootstrap/">angular ui.bootstrap</a> so make sure you have properly installed in your project</p>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h4>Directive always shown</h4>
+				<div
+                    rg-range-picker="myDatetimeRange"
+                    labels="myDatetimeLabels"></div>
+
+                <pre>{{myDatetimeRange | json}}</pre>
+
+            </div>
+		</div>
+	</div>
 </div>

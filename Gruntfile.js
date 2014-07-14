@@ -84,8 +84,8 @@ module.exports = function(grunt) {
 				},
 				build: {
 					files:  {},
-					src:    'eRangePicker.js',
-					dest:   'eRangePicker.min.js'
+					src:    'rangePicker.js',
+					dest:   'rangePicker.min.js'
 				}
 			},
 			less: {
@@ -94,14 +94,14 @@ module.exports = function(grunt) {
 					},
 					files: {
 						"main.css": "_base.less",
-						"eRangePicker.css": "_eRangePicker.less"
+						"rangePicker.css": "rangePicker.less"
 					}
 				}
 			},
 			cssmin: {
 				dev: {
-					src: ['eRangePicker.css'],
-					dest: 'eRangePicker.min.css'
+					src: ['rangePicker.css'],
+					dest: 'rangePicker.min.css'
 				}
 			}/*,
 			karma: {
@@ -112,8 +112,8 @@ module.exports = function(grunt) {
 				}
 			}*/
 		});
-		
-		
+
+
 		/**
 		register/define grunt tasks
 		@toc 6.
@@ -121,7 +121,7 @@ module.exports = function(grunt) {
 		// Default task(s).
 		// grunt.registerTask('default', ['jshint:beforeconcat', 'less:development', 'concat:devJs', 'concat:devCss']);
 		grunt.registerTask('default', ['jshint:beforeconcatQ', 'less:development', 'cssmin', 'uglify:build']);
-	
+
 	}
 	init({});		//initialize here for defaults (init may be called again later within a task)
 
