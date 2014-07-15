@@ -30,7 +30,6 @@
       &.right,
       &:last-child {
         border-right-width: 0;
-        margin-left: -1px;
       }
     }
 
@@ -84,13 +83,39 @@
   }
 }
 
-.ng-range-picker-slider {
-  padding: 15px;
+.rg-range-picker-slider {
+  padding: 15px 20px;
   position: relative;
   min-height: 30px;
 
-  .ng-range-picker-slider-labels {
-    margin-bottom: @font-size-base;
+  .rg-range-picker-slider-labels {
+    margin-bottom: @line-height-computed;
+
+    .row {
+      position: relative;
+    }
+
+    .rg-range-picker-divider {
+      position: absolute;
+      left: 25%;
+      right: 25%;
+      top: @font-size-base * .75;
+      border-top: solid 1px darken(@well-bg, 7%);
+      text-align: center;
+
+      .label {
+        position: relative;
+        top: @font-size-base * -0.75;
+        border: solid 1px darken(@well-bg, 7%);
+        background-color: @well-bg;
+        color: @brand-success;
+        font-weight: 300;
+        font-size: @font-size-base - 2;
+        font-style: italic;
+        padding: (@font-size-base - 8) (@font-size-base - 6) (@font-size-base - 8) (@font-size-base - 4);
+        border-radius: 50%;
+      }
+    }
   }
 }
 
@@ -100,14 +125,14 @@
   color: darken(@well-bg, 60%);
   font-weight: 300;
   border-radius: @font-size-base;
-  font-size: @font-size-base;
+  font-size: @font-size-base - 2;
 }
 
 .clean-slider {
   position: relative;
-  overflow: hidden;
   height: @line-height-computed;
   margin-bottom: @line-height-computed;
+  width: 100%;
 
   .bar {
     .box-shadow(inset 0 1px 2px rgba(0,0,0,.1));
@@ -129,6 +154,32 @@
 
   .bubble {
 
+    text-indent: -999px;
+
+  }
+
+  .input {
+
+    &.low,
+    &.high {
+      cursor: ew-resize;
+    }
+
+    &.selection {
+      cursor: all-scroll;
+    }
+  }
+
+  .pointer {
+
+    &.low {
+      cursor: ew-resize;
+    }
+
+    &.high {
+      cursor: ew-resize;
+    }
+
     &.low,
     &.high {
       background-color: @well-bg;
@@ -138,7 +189,6 @@
       overflow: hidden;
       border-radius: 50%;
       position: relative;
-      cursor: pointer;
 
       &:after {
         content: ' ';
@@ -153,30 +203,6 @@
         margin-left: (@line-height-computed / -4) - 1;
         border-radius: 50%;
       }
-    }
-
-    &.selection {
-      color: @well-bg;
-    }
-
-    &.limit {
-
-      &.floor,
-      &.ceiling {
-        text-indent: -999px;
-      }
-    }
-  }
-
-  .input {
-
-    &.low,
-    &.high {
-      cursor: ew-resize;
-    }
-
-    &.selection {
-      cursor: all-scroll;
     }
   }
 }

@@ -2,18 +2,25 @@
 	<!-- TODO: place directive call here -->
 	<div class="jumbotron">
 		<h1>Datetime Range Picker</h1>
-		<p>An <a href="http://www.angularjs.org">angular</a> directive for pick a range of dates and time (schedule). It requires <a href="http://angular-ui.github.io/bootstrap/">angular ui.bootstrap</a> so make sure you have properly installed in your project</p>
+		<p>An <a href="http://www.angularjs.org">angular</a> directive for pick a range of dates and time (schedule). It requires <a href="http://angular-ui.github.io/bootstrap/">angular ui.bootstrap</a> so make sure you have it properly installed in your project</p>
 	</div>
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h4>Directive always shown</h4>
+        <h2>Directive always shown</h2>
+
+        <div class="row">
+			<div class="col-md-6">
 				<div
                     rg-range-picker="myDatetimeRange"
                     labels="myDatetimeLabels"></div>
-
+            </div>
+            <div class="col-md-6">
+                <input
+                    ng-model="myDatetimeRange.time.from"
+                    class="form-control" type="text"/>
+                <input
+                        ng-model="myDatetimeRange.time.to"
+                        class="form-control" type="text"/>
                 <pre>{{myDatetimeRange | json}}</pre>
-
             </div>
 		</div>
 	</div>

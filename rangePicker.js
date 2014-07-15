@@ -22,7 +22,18 @@ TODO
 
 'use strict';
 
-angular.module('rgkevin.datetimeRangePicker', []).directive('rgRangePicker', [ function () {
+angular.module('rgkevin.datetimeRangePicker', [])
+    .filter('rgTime', [function () {
+        return function (input, type) {
+            var
+                hours = parseInt( input / 60, 10 ),
+                minutes = parseInt( input - (hours * 60) ) || '00',
+                meridian = type ? ' hrs' : ( hours >= 12 && hours !== 24 ? ' pm' : ' am' );
+
+            return (!type && hours > 12 ? (hours === 24 ? '00' : hours - 12) : hours) + ':' + minutes + meridian;
+        };
+    }])
+    .directive('rgRangePicker', [ function () {
 
 	return {
 		restrict: 'A',
@@ -56,22 +67,22 @@ angular.module('rgkevin.datetimeRangePicker', []).directive('rgRangePicker', [ f
                             '<div class="rg-range-picker-calendars">' +
                                 '<div class="rg-range-picker-calendar-box">' +
                                     '<h5 class="rg-range-picker-calendar-label" ng-bind-template="{{labels.date.from}}"></h5>' +
-                                    '<datepicker ng-model="data.date.from" show-weeks="true" class="clean-calendar"></datepicker>' +
+                                    '<datepicker ng-model="data.date.from" max-date="data.date.to" show-weeks="false" class="clean-calendar"></datepicker>' +
                                 '</div>' +
                                 '<div class="rg-range-picker-calendar-box right">' +
                                     '<h5 class="rg-range-picker-calendar-label" ng-bind-template="{{labels.time.from}}"></h5>' +
-                                    '<datepicker ng-model="data.date.to" show-weeks="true" class="clean-calendar"></datepicker>' +
+                                    '<datepicker ng-model="data.date.to" min-date="data.date.from" show-weeks="false" class="clean-calendar"></datepicker>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="ng-range-picker-slider">' +
-                                '<div class="ng-range-picker-slider-labels">' +
+                            '<div class="rg-range-picker-slider">' +
+                                '<div class="rg-range-picker-slider-labels">' +
                                     '<div class="row">' +
-                                        '<div class="col-sm-6 text-center"><span class="label label-range-picker">{{data.time.from}}</span></div>' +
-                                        '<div class="col-sm-6 text-center"><span class="label label-range-picker">{{data.time.to}}</span></div>' +
-                                        '<div class="ng-range-picker-divider"><span class="label">to</span></div>' +
+                                        '<div class="rg-range-picker-divider xs-hidden"><span class="label">to</span></div>' +
+                                        '<div class="col-sm-6 text-center"><span class="label label-range-picker">{{data.time.from | rgTime:data.time.hours24}}</span></div>' +
+                                        '<div class="col-sm-6 text-center"><span class="label label-range-picker">{{data.time.to | rgTime:data.time.hours24}}</span></div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div slider translate-fn="test" class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="1" step="1" step-width="1" precision="0" stretch="3"></div>' +
+                                '<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' +
                             '</div>' +
                         '</div>' +
                     '</div>';
@@ -79,10 +90,6 @@ angular.module('rgkevin.datetimeRangePicker', []).directive('rgRangePicker', [ f
 
 		link: function(scope, element, attrs) {
             console.log('scope, element, attrs', scope, element, attrs);
-            scope.test = function (value) {
-                console.log('value', value);
-                return value * 2;
-            };
             // define labels
             var
                 defaultLabels = {
