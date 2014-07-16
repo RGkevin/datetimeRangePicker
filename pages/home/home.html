@@ -5,6 +5,43 @@
 		<p>An <a href="http://www.angularjs.org">angular</a> directive for pick a range of dates and time (schedule). It requires <a href="http://angular-ui.github.io/bootstrap/">angular ui.bootstrap</a> so make sure you have it properly installed in your project</p>
 	</div>
 	<div class="container">
+
+        <h2>How to install</h2>
+        <p>Add the following files to your project:</p>
+        <code>&#60;script src=&quot;range-picker.js&quot;&#62;&#60;/script&#62;</code><br/>
+        <code>&#60;link rel=&quot;stylesheet&quot; href=&quot;range-picker.min.css&quot;/&#62;</code><br/><br/>
+
+        <p>Add <strong>rgkevin.datetimeRangePicker</strong> module as dependency in your angular app.</p>
+        <pre>angular.module('yourApp', ['rgkevin.datetimeRangePicker']);</pre>
+
+        <h3>Install with bower</h3>
+        <pre>$ bower install datetime-range-picker --save</pre>
+
+        <h3>Documentation</h3>
+        <p>Directive <pre>&#60;div rg-range-picker=&quot;myDatetimeRange&quot; labels=&quot;myDatetimeLabels&quot;&#62;&#60;/div&#62;</pre></p>
+        <p>whre <strong>myDatetimeRange</strong> is a <code>$scope.model</code> object:</p>
+                <pre>{
+    date: {
+        from: new Date(), // start date ( Date object )
+        to: new Date() // end date ( Date object )
+    },
+    time: {
+        from: 480, // default start time (in minutes)
+        to: 1020, // default end time (in minutes)
+        step: 15, // step width
+        minRange: 15, // min range
+        hours24: false // true = 00:00:00 | false = 00:00 am/pm
+    }
+}</pre>
+        <p>and <strong>myDatetimeLabels</strong> is an <code>$scope.model</code> object:</p>
+                <pre>
+{
+    date: {
+        from: 'Start date',
+        to: 'End date'
+    }
+}</pre>
+
         <h2>Directive always shown</h2>
 
         <div class="row">
@@ -14,14 +51,32 @@
                     labels="myDatetimeLabels"></div>
             </div>
             <div class="col-md-6">
-                <input
-                    ng-model="myDatetimeRange.time.from"
-                    class="form-control" type="text"/>
-                <input
-                        ng-model="myDatetimeRange.time.to"
-                        class="form-control" type="text"/>
+                <p><strong>start date:</strong> <i>{{myDatetimeRange.date.from}}</i></p>
+                <p><strong>to date:</strong> <i>{{myDatetimeRange.date.to}}</i></p>
+                <p><strong>start time:</strong> <i>{{myDatetimeRange.time.from | rgTime}}</i> | <i>{{myDatetimeRange.time.from | rgTime:true}}</i></p>
+                <p><strong>to time:</strong> <i>{{myDatetimeRange.time.to | rgTime}}</i> | <i>{{myDatetimeRange.time.to | rgTime:true}}</i></p>
                 <pre>{{myDatetimeRange | json}}</pre>
             </div>
 		</div>
-	</div>
+
+        <h2>Directive with toggle</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p>                <button class="btn btn-default" ng-click="toggle = !toggle">Open directive <i class="glyphicon glyphicon-calendar"></i></button>
+                </p>
+                <div
+                    rg-range-picker="myDatetimeRange"
+                    labels="myDatetimeLabels"
+                    collapse="toggle"></div>
+            </div>
+            <div class="col-md-6">
+                <p>Yo make your this directive collapsible, just add the property <code>collapse</code> to the directive:</p>
+                <pre>&#60;div rg-range-picker=&quot;myDatetimeRange&quot; collapse=&quot;collapseDirective&quot; labels=&quot;myDatetimeLabels&quot;&#62;&#60;/div&#62;</pre>
+                <p>In your button add <code>ng-click="collapseDirective = !collapseDirective"</code></p>
+                <pre>&#60;button ng-click=&quot;collapseDirective = !collapseDirective&quot;&#62;Toggle directive&#60;/button&#62;</pre>
+
+            </div>
+        </div>
+    </div>
 </div>

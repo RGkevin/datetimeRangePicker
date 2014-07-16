@@ -24,13 +24,18 @@ TODO
 
 angular.module('rgkevin.datetimeRangePicker', [])
     .filter('rgTime', [function () {
+        /**
+         * input should be a number of minutes to be parsed
+         * @param {input} number of minutes
+         * @param {type} true = 00:00:00 | false = 00:00 am or pm
+         */
         return function (input, type) {
             var
                 hours = parseInt( input / 60, 10 ),
                 minutes = parseInt( input - (hours * 60) ) || '00',
-                meridian = type ? ' hrs' : ( hours >= 12 && hours !== 24 ? ' pm' : ' am' );
+                meridian = type ? ':00' : ( hours >= 12 && hours !== 24 ? ' pm' : ' am' );
 
-            return (!type && hours > 12 ? (hours === 24 ? '00' : hours - 12) : hours) + ':' + minutes + meridian;
+            return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
         };
     }])
     .directive('rgRangePicker', [ function () {
@@ -70,7 +75,7 @@ angular.module('rgkevin.datetimeRangePicker', [])
                                     '<datepicker ng-model="data.date.from" max-date="data.date.to" show-weeks="false" class="clean-calendar"></datepicker>' +
                                 '</div>' +
                                 '<div class="rg-range-picker-calendar-box right">' +
-                                    '<h5 class="rg-range-picker-calendar-label" ng-bind-template="{{labels.time.from}}"></h5>' +
+                                    '<h5 class="rg-range-picker-calendar-label" ng-bind-template="{{labels.date.to}}"></h5>' +
                                     '<datepicker ng-model="data.date.to" min-date="data.date.from" show-weeks="false" class="clean-calendar"></datepicker>' +
                                 '</div>' +
                             '</div>' +
@@ -94,19 +99,22 @@ angular.module('rgkevin.datetimeRangePicker', [])
             var
                 defaultLabels = {
                     date: {
-                        from: 'fecha inicio',
-                        to: 'fecha final'
-                    },
-                    time: {
-                        from: 'fecha final',
-                        to: 'fecha inicio'
+                        from: 'Start date',
+                        to: 'End date'
                     }
+                },
+                timeDefaults = {
+                    from: 480, // default low value
+                    to: 1020, // default high value
+                    dFrom: 0, // lowest integer
+                    dTo: 1440, // highest integer
+                    step: 15, // step width
+                    minRange: 15, // min range
+                    hours24: true // true for 00:00:00 format and false for 00:00 am or pm
                 };
-            for(var xx in (scope.labels || {})) {
-                if(scope.labels[xx] ===undefined) {
-                    scope.labels[xx] =defaultLabels[xx];
-                }
-            }
+
+            scope.labels = angular.extend(defaultLabels, scope.labels);
+            scope.data.time = angular.extend(timeDefaults, scope.data.time);
 
 		},
 

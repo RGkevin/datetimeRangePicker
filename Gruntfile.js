@@ -85,8 +85,8 @@ module.exports = function(grunt) {
 				},
 				build: {
 					files:  {},
-					src:    'rangePicker.js',
-					dest:   'rangePicker.min.js'
+					src:    'range-picker.js',
+					dest:   'range-picker.min.js'
 				}
 			},
 			less: {
@@ -95,15 +95,15 @@ module.exports = function(grunt) {
 					},
 					files: {
 						"main.css": "_base.less",
-						"rangePicker.css": "rangePicker.less"
+						"range-picker.css": "range-picker.less"
 					}
 				}
 			},
             // Compiles Sass to CSS and generates necessary files if requested
             compass: {
                 options: {
-                    sassDir: '/rangePicker.sass',
-                    cssDir: '/rangePicker.css',
+                    sassDir: '/range-picker.sass',
+                    cssDir: '/range-picker.css',
                     relativeAssets: false,
                     assetCacheBuster: false
                 },
@@ -115,8 +115,8 @@ module.exports = function(grunt) {
             },
 			cssmin: {
 				dev: {
-					src: ['rangePicker.css'],
-					dest: 'rangePicker.min.css'
+					src: ['range-picker.css'],
+					dest: 'range-picker.min.css'
 				}
 			}/*,
 			karma: {
@@ -135,8 +135,8 @@ module.exports = function(grunt) {
 		*/
 		// Default task(s).
 		// grunt.registerTask('default', ['jshint:beforeconcat', 'less:development', 'concat:devJs', 'concat:devCss']);
-		//grunt.registerTask('default', ['jshint:beforeconcatQ', 'less:development', 'cssmin', 'uglify:build']);
-		grunt.registerTask('default', ['jshint:beforeconcatQ', 'compass', 'cssmin', 'uglify:build']);
+		grunt.registerTask('default', ['jshint:beforeconcatQ', 'less:development', 'cssmin', 'uglify:build']);
+		//grunt.registerTask('default', ['jshint:beforeconcatQ', 'compass', 'cssmin', 'uglify:build']);
 
 	}
 	init({});		//initialize here for defaults (init may be called again later within a task)
