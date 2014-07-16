@@ -1,9 +1,10 @@
 {
   "name": "datetimeRangePicker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "authors": [
     "Kevin Eduardo <rgkevin.lopez@gmail.com>"
   ],
+  "main": "range-picker.js",
   "description": "A datetime picker for range between two calendars and time sliders ",
   "keywords": [
     "calendar",
