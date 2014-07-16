@@ -7,7 +7,7 @@
 
 angular.module('myApp', [
 'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate',		//additional angular modules
-'rgkevin.datetimeRangePicker', 'ui.bootstrap', 'vr.directives.slider'
+'rgkevin.datetimeRangePicker', 'ui.bootstrap'
 ]).
 config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
 	/**
