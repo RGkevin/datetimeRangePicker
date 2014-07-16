@@ -1,6 +1,6 @@
 {
   "name": "datetimeRangePicker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "authors": [
     "Kevin Eduardo <rgkevin.lopez@gmail.com>"
   ],
@@ -28,7 +28,8 @@
     "angular-animate": "~1.2.0",
     "angular-sanitize": "~1.2.0",
     "angular-touch": "~1.2.0",
-    "venturocket-angular-slider": "~0.3.2"
+    "venturocket-angular-slider": "~0.3.2",
+    "jquery": "~2.1.1"
   },
   "devDependencies": {}
 }

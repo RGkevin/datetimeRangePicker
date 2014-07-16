@@ -22,7 +22,7 @@ TODO
 
 'use strict';
 
-angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
+angular.module('rgkevin.datetimeRangePicker', [])
     .filter('rgTime', [function () {
         /**
          * input should be a number of minutes to be parsed
@@ -38,7 +38,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
         };
     }])
-    .directive('rgRangePicker', [ function () {
+    .directive('rgRangePicker', [ '$compile', function ($compile) {
 
 	return {
 		restrict: 'A',
@@ -79,7 +79,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                                     '<datepicker ng-model="data.date.to" min-date="data.date.from" show-weeks="false" class="clean-calendar"></datepicker>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="rg-range-picker-slider">' +
+                            '<div class="rg-range-picker-slider" id="rgRangePickerSliderContainer">' +
                                 '<div class="rg-range-picker-slider-labels">' +
                                     '<div class="row">' +
                                         '<div class="rg-range-picker-divider xs-hidden"><span class="label">to</span></div>' +
@@ -87,16 +87,18 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                                         '<div class="col-sm-6 text-center"><span class="label label-range-picker">{{data.time.to | rgTime:data.time.hours24}}</span></div>' +
                                     '</div>' +
                                 '</div>' +
-                                '<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' +
+                                //'<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' +
                             '</div>' +
                         '</div>' +
                     '</div>';
 		},
 
 		link: function(scope, element, attrs) {
-            console.log('scope, element, attrs', scope, element, attrs);
             // define labels
             var
+                sliderContainer     = angular.element('#rgRangePickerSliderContainer', element[0]),
+                slider              = angular.element( '<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' ),
+                sliderAlreadyRender = false,
                 defaultLabels = {
                     date: {
                         from: 'Start date',
@@ -115,6 +117,28 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 
             scope.labels = angular.extend(defaultLabels, scope.labels);
             scope.data.time = angular.extend(timeDefaults, scope.data.time);
+
+            function renderSlider () {
+                if(!sliderAlreadyRender) {
+                    sliderContainer.append( slider );
+                    $compile( slider )( scope );
+                    sliderAlreadyRender = true;
+                }
+            }
+
+            if ( attrs.collapse ) {
+                scope.$watch( function() {
+                    return element[0].className;
+                }, function() {
+                    if(element.hasClass('in')) {
+                        // render slider
+                        renderSlider();
+                    }
+                });
+                //renderSlider();
+            } else {
+                renderSlider();
+            }
 
 		},
 
