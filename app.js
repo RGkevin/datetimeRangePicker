@@ -7,7 +7,7 @@
 
 angular.module('myApp', [
 'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate',		//additional angular modules
-'rgkevin.datetimeRangePicker', 'ui.bootstrap'
+'rgkevin.datetimeRangePicker', 'ui.bootstrap', 'vr.directives.slider'
 ]).
 config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider, $compileProvider) {
 	/**
@@ -19,8 +19,8 @@ config(['$routeProvider', '$locationProvider', '$compileProvider', function($rou
 	// var staticPath ='/';
 	var staticPath;
 	// staticPath ='/angular-directives/datetimeRangePicker/';		//local
-	//staticPath ='/';		//nodejs (local)
-	staticPath ='/datetimeRangePicker/';		//gh-pages
+	staticPath ='/';		//nodejs (local)
+	//staticPath ='/datetimeRangePicker/';		//gh-pages
 	var appPathRoute ='/';
 	var pagesPath =staticPath+'pages/';
 

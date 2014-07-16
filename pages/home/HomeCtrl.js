@@ -25,6 +25,8 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
         }
     };
     $scope.toggle = true;
-
+    $scope.toggleDirective = function() {
+    	$scope.toggle = !$scope.toggle;
+    };
 
 }]);

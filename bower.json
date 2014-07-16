@@ -23,7 +23,8 @@
     "bootstrap": "~3.2.0",
     "angular-bootstrap": "~0.11.0",
     "venturocket-angular-slider": "~0.3.2",
-    "sass-bootstrap": "~3.0.2"
+    "sass-bootstrap": "~3.0.2",
+    "jquery": "~2.1.1"
   },
   "devDependencies": {}
 }
