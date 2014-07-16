@@ -22,7 +22,7 @@ TODO
 
 'use strict';
 
-angular.module('rgkevin.datetimeRangePicker', [])
+angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
     .filter('rgTime', [function () {
         /**
          * input should be a number of minutes to be parsed
