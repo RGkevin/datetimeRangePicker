@@ -143,7 +143,6 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             /**
              * Responsive fix
              */
-            console.log('width', element.width());
             if ( element.width() <= sliderMinWidth ) {
                 angular.element( '.rg-range-picker', element[0]).addClass('rg-range-picker-responsive');
             }
