@@ -1,7 +1,4 @@
 /* jrg-eRangePicker */
-.rg-range-picker {
-  max-width: 615px;
-}
 .rg-range-picker .rg-range-picker-box {
   width: 100%;
   padding: 0;
@@ -23,12 +20,30 @@
   width: 50%;
   border-right: solid 1px #ededed;
   text-align: center;
+  min-width: 307.5px;
+  margin: 0 auto;
 }
 .rg-range-picker .rg-range-picker-calendars .rg-range-picker-calendar-box.right,
 .rg-range-picker .rg-range-picker-calendars .rg-range-picker-calendar-box:last-child {
   border-right-width: 0;
 }
 .rg-range-picker .rg-range-picker-calendars .rg-range-picker-calendar-label {
+  margin-bottom: 14px;
+  margin-top: 14px;
+  color: #999999;
+  font-weight: 200;
+}
+.rg-range-picker.rg-range-picker-responsive .rg-range-picker-calendars {
+  border-bottom-width: 0;
+}
+.rg-range-picker.rg-range-picker-responsive .rg-range-picker-calendars .rg-range-picker-calendar-box {
+  float: none;
+  width: auto;
+  border-right-width: 0;
+  margin: 0 auto 14px;
+  border-bottom: solid 1px #ededed;
+}
+.rg-range-picker.rg-range-picker-responsive .rg-range-picker-calendars .rg-range-picker-calendar-label {
   margin-bottom: 14px;
   margin-top: 14px;
   color: #999999;

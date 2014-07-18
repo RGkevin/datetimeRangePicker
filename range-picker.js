@@ -83,8 +83,8 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                                 '<div class="rg-range-picker-slider-labels">' +
                                     '<div class="row">' +
                                         '<div class="rg-range-picker-divider xs-hidden"><span class="label">to</span></div>' +
-                                        '<div class="col-sm-6 text-center"><span class="label label-range-picker">{{data.time.from | rgTime:data.time.hours24}}</span></div>' +
-                                        '<div class="col-sm-6 text-center"><span class="label label-range-picker">{{data.time.to | rgTime:data.time.hours24}}</span></div>' +
+                                        '<div class="col-xs-6 text-center"><span class="label label-range-picker">{{data.time.from | rgTime:data.time.hours24}}</span></div>' +
+                                        '<div class="col-xs-6 text-center"><span class="label label-range-picker">{{data.time.to | rgTime:data.time.hours24}}</span></div>' +
                                     '</div>' +
                                 '</div>' +
                                 //'<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' +
@@ -96,6 +96,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 		link: function(scope, element, attrs) {
             // define labels
             var
+                sliderMinWidth      = 615,// if directive is less width than 615, then display responsive version
                 sliderContainer     = angular.element('#rgRangePickerSliderContainer', element[0]),
                 slider              = angular.element( '<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' ),
                 sliderAlreadyRender = false,
@@ -135,9 +136,16 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                         renderSlider();
                     }
                 });
-                //renderSlider();
             } else {
                 renderSlider();
+            }
+
+            /**
+             * Responsive fix
+             */
+            console.log('width', element.width());
+            if ( element.width() <= sliderMinWidth ) {
+                angular.element( '.rg-range-picker', element[0]).addClass('rg-range-picker-responsive');
             }
 
 		},

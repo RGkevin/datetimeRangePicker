@@ -6,7 +6,7 @@
 @maxWidth: 615px;
 
 .rg-range-picker {
-  max-width: @maxWidth;
+  //max-width: @maxWidth;
 
 
   .rg-range-picker-box {
@@ -26,6 +26,8 @@
       width: 50%;
       border-right: solid 1px darken(@well-bg, 7%);
       text-align: center;
+      min-width: @maxWidth / 2;
+      margin: 0 auto;
 
       &.right,
       &:last-child {
@@ -41,7 +43,34 @@
     }
 
   }
+
+  // Responsive version
+  &.rg-range-picker-responsive {
+
+
+    .rg-range-picker-calendars {
+      border-bottom-width: 0;
+
+      .rg-range-picker-calendar-box {
+        float: none;
+        width: auto;
+        border-right-width: 0;
+        margin: 0 auto @font-size-base;
+        border-bottom: solid 1px darken(@well-bg, 7%);
+
+      }
+
+      .rg-range-picker-calendar-label {
+        margin-bottom: @font-size-base;
+        margin-top: @font-size-base;
+        color: darken(@well-bg, 40%);
+        font-weight: 200;
+      }
+
+    }
+  }
 }
+
 
 // calendars style
 .clean-calendar {
