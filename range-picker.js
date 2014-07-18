@@ -96,7 +96,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 		link: function(scope, element, attrs) {
             // define labels
             var
-                sliderMinWidth      = 615,// if directive is less width than 615, then display responsive version
+                sliderMinWidth      = 500,// if directive is less width than 500, then display responsive version
                 sliderContainer     = angular.element('#rgRangePickerSliderContainer', element[0]),
                 slider              = angular.element( '<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' ),
                 sliderAlreadyRender = false,
