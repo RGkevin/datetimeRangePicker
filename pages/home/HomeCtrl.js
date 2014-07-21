@@ -29,4 +29,10 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
     	$scope.toggle = !$scope.toggle;
     };
 
+    $scope.whentimechangedata = {};
+
+    $scope.whenTimeChange = function (data) {
+        $scope.whentimechangedata = data;
+    };
+
 }]);

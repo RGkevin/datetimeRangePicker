@@ -1,4 +1,7 @@
 /* jrg-eRangePicker */
+.rg-range-picker {
+  max-width: 615px;
+}
 .rg-range-picker .rg-range-picker-box {
   width: 100%;
   padding: 0;
@@ -20,7 +23,6 @@
   width: 50%;
   border-right: solid 1px #ededed;
   text-align: center;
-  min-width: 307.5px;
   margin: 0 auto;
 }
 .rg-range-picker .rg-range-picker-calendars .rg-range-picker-calendar-box.right,

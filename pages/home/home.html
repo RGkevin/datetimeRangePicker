@@ -48,7 +48,8 @@
 			<div class="col-md-6">
 				<div
                     rg-range-picker="myDatetimeRange"
-                    labels="myDatetimeLabels"></div>
+                    labels="myDatetimeLabels"
+                    on-time-change="whenTimeChange"></div>
             </div>
             <div class="col-md-6">
                 <p><strong>start date:</strong> <i>{{myDatetimeRange.date.from}}</i></p>
@@ -56,6 +57,8 @@
                 <p><strong>start time:</strong> <i>{{myDatetimeRange.time.from | rgTime}}</i> | <i>{{myDatetimeRange.time.from | rgTime:true}}</i></p>
                 <p><strong>to time:</strong> <i>{{myDatetimeRange.time.to | rgTime}}</i> | <i>{{myDatetimeRange.time.to | rgTime:true}}</i></p>
                 <pre>{{myDatetimeRange | json}}</pre>
+                <p>Event: <strong>onTimeChange</strong></p>
+                <pre>{{whentimechangedata | json}}</pre>
             </div>
 		</div>
 

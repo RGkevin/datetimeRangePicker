@@ -38,13 +38,14 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
         };
     }])
-    .directive('rgRangePicker', [ '$compile', function ($compile) {
+    .directive('rgRangePicker', [ '$compile', '$timeout', '$filter', function ($compile, $timeout, $filter) {
 
 	return {
 		restrict: 'A',
 		scope: {
             data: '=rgRangePicker',
-            labels: '='
+            labels: '=',
+            onTimeChange: '='
 		},
 
 		// replace: true,
@@ -87,7 +88,6 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                                         '<div class="col-xs-6 text-center"><span class="label label-range-picker">{{data.time.to | rgTime:data.time.hours24}}</span></div>' +
                                     '</div>' +
                                 '</div>' +
-                                //'<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' +
                             '</div>' +
                         '</div>' +
                     '</div>';
@@ -96,7 +96,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 		link: function(scope, element, attrs) {
             // define labels
             var
-                sliderMinWidth      = 500,// if directive is less width than 500, then display responsive version
+                sliderMinWidth      = 400,// if directive is less width than 500, then display responsive version
                 sliderContainer     = angular.element('#rgRangePickerSliderContainer', element[0]),
                 slider              = angular.element( '<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>' ),
                 sliderAlreadyRender = false,
@@ -114,7 +114,8 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                     step: 15, // step width
                     minRange: 15, // min range
                     hours24: true // true for 00:00:00 format and false for 00:00 am or pm
-                };
+                },
+                timeChangePromise;
 
             scope.labels = angular.extend(defaultLabels, scope.labels);
             scope.data.time = angular.extend(timeDefaults, scope.data.time);
@@ -146,6 +147,42 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             if ( element.width() <= sliderMinWidth ) {
                 angular.element( '.rg-range-picker', element[0]).addClass('rg-range-picker-responsive');
             }
+
+            /**
+             * Trigger event when user change slide range
+             */
+            scope.$watch('data.time.from', function (newValue, oldValue) {
+
+                if ( !angular.isUndefined(timeChangePromise) ) {
+                    $timeout.cancel(timeChangePromise);
+
+                }
+                timeChangePromise = $timeout( function(){
+                    if ( !angular.isUndefined(scope.onTimeChange) && newValue !== oldValue ) {
+                        scope.onTimeChange({
+                            from: $filter('rgTime')(scope.data.time.from, true),
+                            to: $filter('rgTime')(scope.data.time.to, true),
+                            range: $filter('rgTime')( scope.data.time.to - scope.data.time.from , true)
+                        });
+                    }
+                }, 400);
+            });
+            scope.$watch('data.time.to', function (newValue, oldValue) {
+
+                if ( !angular.isUndefined(timeChangePromise) ) {
+                    $timeout.cancel(timeChangePromise);
+
+                }
+                timeChangePromise = $timeout( function(){
+                    if ( !angular.isUndefined(scope.onTimeChange) && newValue !== oldValue ) {
+                        scope.onTimeChange({
+                            from: $filter('rgTime')(scope.data.time.from, true),
+                            to: $filter('rgTime')(scope.data.time.to, true),
+                            range: $filter('rgTime')( scope.data.time.to - scope.data.time.from , true)
+                        });
+                    }
+                }, 400);
+            });
 
 		},
 
