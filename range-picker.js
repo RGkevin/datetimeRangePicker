@@ -125,6 +125,13 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                     sliderContainer.append( slider );
                     $compile( slider )( scope );
                     sliderAlreadyRender = true;
+
+                    /**
+                     * Responsive fix
+                     */
+                    if ( element.width() <= sliderMinWidth ) {
+                        angular.element( '.rg-range-picker', element[0]).addClass('rg-range-picker-responsive');
+                    }
                 }
             }
 
@@ -139,13 +146,6 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 });
             } else {
                 renderSlider();
-            }
-
-            /**
-             * Responsive fix
-             */
-            if ( element.width() <= sliderMinWidth ) {
-                angular.element( '.rg-range-picker', element[0]).addClass('rg-range-picker-responsive');
             }
 
             /**
