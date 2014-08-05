@@ -63,6 +63,9 @@
 .clean-calendar > table thead tr th .btn {
   background-color: transparent !important;
 }
+.clean-calendar > table .text-info {
+  color: #ffffff;
+}
 .clean-calendar .btn {
   border-width: 0;
 }
