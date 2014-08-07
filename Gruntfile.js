@@ -101,9 +101,17 @@ module.exports = function(grunt) {
 			},
             // Compiles Sass to CSS and generates necessary files if requested
             compass: {
+                /*dist: {                   // Target
+                    options: {              // Target options
+                        sassDir: 'sass',
+                        cssDir: 'css',
+                        environment: 'production',
+                        relativeAssets: false
+                    }
+                },*/
                 options: {
-                    sassDir: '/range-picker.sass',
-                    cssDir: '/range-picker.css',
+                    sassDir: 'sass',
+                    cssDir: 'css',
                     relativeAssets: false,
                     assetCacheBuster: false
                 },
@@ -135,7 +143,7 @@ module.exports = function(grunt) {
 		*/
 		// Default task(s).
 		// grunt.registerTask('default', ['jshint:beforeconcat', 'less:development', 'concat:devJs', 'concat:devCss']);
-		grunt.registerTask('default', ['jshint:beforeconcatQ', 'less:development', 'cssmin', 'uglify:build']);
+		grunt.registerTask('default', ['jshint:beforeconcat', 'compass:server', 'uglify:build']);
 		//grunt.registerTask('default', ['jshint:beforeconcatQ', 'compass', 'cssmin', 'uglify:build']);
 
 	}
