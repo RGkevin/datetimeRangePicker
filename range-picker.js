@@ -131,7 +131,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             scope.labels = angular.extend(defaultLabels, scope.labels);
             scope.data.time = angular.extend(timeDefaults, scope.data.time);
             scope.data.date = angular.extend(dateDefaults, scope.data.date);
-            console.log('scope.data', scope.data);
+            //console.log('scope.data', scope.data);
 
             function renderSlider () {
                 if(!sliderAlreadyRender) {
