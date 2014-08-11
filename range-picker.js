@@ -45,12 +45,15 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 		scope: {
             data: '=rgRangePicker',
             labels: '=',
-            onTimeChange: '='
+            onTimeChange: '&',
+            superMaxDate: '=',
+            superMinDate: '=',
+            maxRangeDate: '=' // in days
 		},
 
 		// replace: true,
-		template: function(element, attrs) {
-			var defaultsAttrs ={
+		template: function(/*element, attrs*/) {
+			/*var defaultsAttrs ={
                 data: {
                     date: {
                         from: new Date(),
@@ -66,21 +69,21 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 				if(attrs[xx] ===undefined) {
 					attrs[xx] =defaultsAttrs[xx];
 				}
-			}
+			}*/
 
 			return '<div class="rg-range-picker">' +
-                        '<div class="rg-range-picker-box well">' +
-                            '<div class="rg-range-picker-calendars">' +
+                        '<div class="rg-range-picker-box well" ng-class="{ \'only-calendars\': !data.hasTimeSliders, \'only-slider\': !data.hasDatePickers }">' +
+                            '<div class="rg-range-picker-calendars" ng-show="data.hasDatePickers">' +
                                 '<div class="rg-range-picker-calendar-box">' +
                                     '<h5 class="rg-range-picker-calendar-label" ng-bind-template="{{labels.date.from}}"></h5>' +
-                                    '<datepicker ng-model="data.date.from" max-date="data.date.to" show-weeks="false" class="clean-calendar"></datepicker>' +
+                                    '<datepicker ng-model="data.date.from" max-date="data.date.to" min-date="data.date.min" show-weeks="false" class="clean-calendar"></datepicker>' +
                                 '</div>' +
                                 '<div class="rg-range-picker-calendar-box right">' +
                                     '<h5 class="rg-range-picker-calendar-label" ng-bind-template="{{labels.date.to}}"></h5>' +
-                                    '<datepicker ng-model="data.date.to" min-date="data.date.from" show-weeks="false" class="clean-calendar"></datepicker>' +
+                                    '<datepicker ng-model="data.date.to" min-date="data.date.from" max-date="data.date.max" show-weeks="false" class="clean-calendar"></datepicker>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="rg-range-picker-slider" id="rgRangePickerSliderContainer">' +
+                            '<div class="rg-range-picker-slider" id="rgRangePickerSliderContainer" ng-show="data.hasTimeSliders">' +
                                 '<div class="rg-range-picker-slider-labels">' +
                                     '<div class="row">' +
                                         '<div class="rg-range-picker-divider xs-hidden"><span class="label">to</span></div>' +
@@ -115,10 +118,20 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                     minRange: 15, // min range
                     hours24: true // true for 00:00:00 format and false for 00:00 am or pm
                 },
+                dateDefaults = {
+                    from: new Date(),
+                    to: new Date(),
+                    min: new Date(),
+                    max: new Date()
+                },
                 timeChangePromise;
 
+            scope.data.hasDatePickers = angular.isObject(scope.data.date);
+            scope.data.hasTimeSliders = angular.isObject(scope.data.time);
             scope.labels = angular.extend(defaultLabels, scope.labels);
             scope.data.time = angular.extend(timeDefaults, scope.data.time);
+            scope.data.date = angular.extend(dateDefaults, scope.data.date);
+            console.log('scope.data', scope.data);
 
             function renderSlider () {
                 if(!sliderAlreadyRender) {
@@ -183,6 +196,30 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                     }
                 }, 400);
             });
+
+            /**
+             * Max Range Date functionality
+             */
+            var
+                maxRange = (scope.maxRangeDate || 0) * 86400000,
+                superMin = scope.data.date.min, // get absolute values
+                superMax = scope.data.date.max;
+
+            function updateMinAndMaxDate() {
+                var
+                    currentRange = scope.data.date.to - scope.data.date.from;
+                // set min date
+                //scope.data.date.min = new Date();
+                if ( currentRange < maxRange ) {
+                  //scope.data.date.min = new Date( scope.data.date.from );
+                }
+                /*console.log('currentRange', currentRange);
+                console.log('maxRange', maxRange);*/
+            }
+
+            scope.$watch('data.date.from', updateMinAndMaxDate);
+
+            scope.$watch('data.date.to', updateMinAndMaxDate);
 
 		},
 

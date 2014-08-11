@@ -14,7 +14,12 @@ $maxWidth: 615px !default
     padding: 0
     background-color: $well-bg
 
+    &.only-calendars
 
+      .rg-range-picker-calendars
+        border-bottom-width: 0
+
+    //&.only-slider
 
   .rg-range-picker-calendars
     border-bottom: solid 1px darken($well-bg, 7%)
@@ -38,10 +43,6 @@ $maxWidth: 615px !default
       margin-top: $font-size-base
       color: darken($well-bg, 40%)
       font-weight: 200
-
-
-
-
 
 // calendars style
 .clean-calendar
@@ -88,8 +89,10 @@ $maxWidth: 615px !default
 
           .btn
             background-color: $well-bg
-            border-radius: 50%
             padding: $padding-small-vertical + 3 $padding-small-horizontal - 4
+
+            +transition-property(background)
+            +transition-duration(350ms)
 
             .text-info
               font-weight: bold
