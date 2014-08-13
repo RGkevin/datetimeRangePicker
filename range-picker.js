@@ -208,8 +208,8 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
              */
             var
                 maxRange = (scope.maxRangeDate || 0) * 86400000,
-                superMin = scope.data.date.min, // get absolute values
-                superMax = scope.data.date.max;
+                superMin = scope.data.date && scope.data.date.min, // get absolute values
+                superMax = scope.data.date && scope.data.date.max;
 
             function updateMinAndMaxDate() {
                 var
@@ -223,10 +223,10 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 console.log('maxRange', maxRange);*/
             }
 
-            scope.$watch('data.date.from', updateMinAndMaxDate);
-
-            scope.$watch('data.date.to', updateMinAndMaxDate);
-
+            if ( scope.data.hasDatePickers ) {
+                scope.$watch('data.date.from', updateMinAndMaxDate);
+                scope.$watch('data.date.to', updateMinAndMaxDate);
+            }
 		},
 
 		controller: function($scope, $element, $attrs) {
