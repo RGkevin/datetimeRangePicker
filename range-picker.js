@@ -121,16 +121,22 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 dateDefaults = {
                     from: new Date(),
                     to: new Date(),
-                    min: new Date(),
-                    max: new Date()
+                    min: null,
+                    max: null
                 },
                 timeChangePromise;
 
             scope.data.hasDatePickers = angular.isObject(scope.data.date);
             scope.data.hasTimeSliders = angular.isObject(scope.data.time);
             scope.labels = angular.extend(defaultLabels, scope.labels);
-            scope.data.time = angular.extend(timeDefaults, scope.data.time);
-            scope.data.date = angular.extend(dateDefaults, scope.data.date);
+            if (scope.data.hasDatePickers) {
+                scope.data.date = angular.extend(dateDefaults, scope.data.date);
+            }
+            if (scope.data.hasTimeSliders) {
+                scope.data.time = angular.extend(timeDefaults, scope.data.time);
+            }
+
+
             //console.log('scope.data', scope.data);
 
             function renderSlider () {

@@ -18,9 +18,9 @@ config(['$routeProvider', '$locationProvider', '$compileProvider', function($rou
 
 	// var staticPath ='/';
 	var staticPath;
-	// staticPath ='/angular-directives/datetimeRangePicker/';		//local
+	staticPath ='/angular-directives/datetimeRangePicker/';		//local
 	//staticPath ='/';		//nodejs (local)
-	staticPath ='/datetimeRangePicker/';		//gh-pages
+	//staticPath ='/datetimeRangePicker/';		//gh-pages
 	var appPathRoute ='/';
 	var pagesPath =staticPath+'pages/';
 

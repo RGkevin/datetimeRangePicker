@@ -8,9 +8,9 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
 	$scope.myDatetimeRange = {
 		date: {
 			from: new Date(),
-			to: new Date(),
+			to: new Date()/*,
             min: new Date(),
-            max: new Date()
+            max: new Date()*/
 		},
 		time: {
 			from: 480, // default low value

@@ -31,8 +31,9 @@
 
         <h2>How to install</h2>
         <p>Add the following files to your project:</p>
-        <code>&#60;script src=&quot;range-picker.js&quot;&#62;&#60;/script&#62;</code><br/>
-        <code>&#60;link rel=&quot;stylesheet&quot; href=&quot;range-picker.min.css&quot;/&#62;</code><br/><br/>
+        <code>&#60;script src=&quot;range-picker.js&quot;&#62;&#60;/script&#62;</code><br/><br/>
+
+        <p>For now it only supports SASS styling, so import the <code>range-picker.sass</code> file to your sass project</p>
 
         <p>Add <strong>rgkevin.datetimeRangePicker</strong> module as dependency in your angular app.</p>
         <pre>angular.module('yourApp', ['rgkevin.datetimeRangePicker']);</pre>
@@ -42,7 +43,7 @@
 
         <h3>Documentation</h3>
         <p>Directive <pre>&#60;div rg-range-picker=&quot;myDatetimeRange&quot; labels=&quot;myDatetimeLabels&quot;&#62;&#60;/div&#62;</pre></p>
-        <p>whre <strong>myDatetimeRange</strong> is a <code>$scope.model</code> object:</p>
+        <p>where <strong>myDatetimeRange</strong> is a <code>$scope.model</code> object:</p>
                 <pre>{
     date: {
         from: new Date(), // start date ( Date object )
