@@ -56,5 +56,19 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
         }
     };
 
+    // directive with max range in date pickers
+    var
+        _today      = new Date(),
+        _yesterday  = new Date( _today.getTime() - (86400000 * 10) );
+
+    $scope.datePickerWithRange = {
+        date: {
+            from: new Date(),
+            to: new Date(),
+            max: _today,
+            min: _yesterday
+        }
+    };
+    $scope.maxRangeDate = 5; //days
 
 }]);
