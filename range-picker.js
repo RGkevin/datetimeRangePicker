@@ -32,7 +32,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
         return function (input, type) {
             var
                 hours = parseInt( input / 60, 10 ),
-                minutes = parseInt( input - (hours * 60) ) || '00',
+                minutes = (input - (hours * 60)) < 10 ? '0' + (input - (hours * 60)) : input - (hours * 60),
                 meridian = type ? ':00' : ( hours >= 12 && hours !== 24 ? ' pm' : ' am' );
 
             return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
@@ -218,12 +218,6 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 scope.data.date.min = new Date(_min);
                 // set max date
                 scope.data.date.max = new Date(_max);
-
-                console.log('currentRange', currentRange / 86400000);
-                console.log('offset', offset / 86400000, offset);
-                console.log('min', new Date(scope.data.date.from.getTime() - offset));
-                console.log('_max', scope.data.date.to.getTime(), scope.data.date.to.getTime() + offset);
-                console.log('max', new Date(scope.data.date.to.getTime() + offset));
             }
 
             if ( scope.maxRangeDate && scope.data.hasDatePickers ) {

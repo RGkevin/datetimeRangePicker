@@ -15,7 +15,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
 		time: {
 			from: 480, // default low value
 			to: 1020, // default high value
-            step: 15, // step width
+            step: 5, // step width
             minRange: 15, // min range
             hours24: false // true for 24hrs based time | false for PM and AM
 		}
