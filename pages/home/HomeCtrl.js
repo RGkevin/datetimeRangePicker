@@ -34,6 +34,7 @@ angular.module('myApp').controller('HomeCtrl', ['$scope', function($scope) {
     $scope.whentimechangedata = {};
 
     $scope.whenTimeChange = function (data) {
+        console.log('schedule changes', data);
         $scope.whentimechangedata = data;
     };
 
