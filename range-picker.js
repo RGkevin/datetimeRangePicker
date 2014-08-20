@@ -166,39 +166,27 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             /**
              * Trigger event when user change slide range
              */
-            scope.$watch('data.time.from', function (newValue, oldValue) {
-
+            function timeChanges (newValue, oldValue) {
                 if ( !angular.isUndefined(timeChangePromise) ) {
                     $timeout.cancel(timeChangePromise);
 
                 }
-                timeChangePromise = $timeout( function(){
-                    if ( !angular.isUndefined(scope.onTimeChange) && newValue !== oldValue ) {
-                        scope.onTimeChange({
+                if ( newValue !== oldValue ) {
+                    timeChangePromise = $timeout( function(){
+
+                        scope.onTimeChange()({
                             from: $filter('rgTime')(scope.data.time.from, true),
                             to: $filter('rgTime')(scope.data.time.to, true),
                             range: $filter('rgTime')( scope.data.time.to - scope.data.time.from , true)
                         });
-                    }
-                }, 400);
-            });
-            scope.$watch('data.time.to', function (newValue, oldValue) {
 
-                if ( !angular.isUndefined(timeChangePromise) ) {
-                    $timeout.cancel(timeChangePromise);
-
+                    }, 500);
                 }
-                timeChangePromise = $timeout( function(){
-                    if ( !angular.isUndefined(scope.onTimeChange) && newValue !== oldValue ) {
-                        scope.onTimeChange({
-                            from: $filter('rgTime')(scope.data.time.from, true),
-                            to: $filter('rgTime')(scope.data.time.to, true),
-                            range: $filter('rgTime')( scope.data.time.to - scope.data.time.from , true)
-                        });
-                    }
-                }, 400);
-            });
-
+            }
+            if ( !angular.isUndefined(scope.onTimeChange()) && scope.data.hasTimeSliders ) {
+                scope.$watch('data.time.from', timeChanges);
+                scope.$watch('data.time.to', timeChanges);
+            }
             /**
              * Max Range Date functionality
              */
