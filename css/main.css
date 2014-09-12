@@ -7818,6 +7818,7 @@ td.visible-print {
 /* line 190, ../range-picker.sass */
 .clean-slider .bubble {
   text-indent: -999px;
+  overflow: hidden;
 }
 /* line 198, ../range-picker.sass */
 .clean-slider .input.low, .clean-slider .input.high {
