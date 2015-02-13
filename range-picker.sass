@@ -8,6 +8,13 @@ $maxWidth: 615px !default
 .rg-range-picker
   max-width: $maxWidth
 
+  &.rg-range-picker-vertical
+
+    .rg-range-picker-calendars
+
+      .rg-range-picker-calendar-box
+        width: 100%
+        border-right: none
 
   .rg-range-picker-box
     width: 100%
@@ -27,10 +34,11 @@ $maxWidth: 615px !default
     +clearfix()
 
     .rg-range-picker-calendar-box
-      float: left
-      width: 50%
       border-right: solid 1px darken($well-bg, 7%)
+      float: left
+
       text-align: center
+      width: 50%
 
       &.right,
       &:last-child
