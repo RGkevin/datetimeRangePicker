@@ -46,7 +46,8 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             data: '=rgRangePicker',
             labels: '=',
             onTimeChange: '&',
-            maxRangeDate: '=' // in days
+            maxRangeDate: '=', // in days
+            vertical : '='
 		},
 
 		// replace: true,
@@ -69,7 +70,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 				}
 			}*/
 
-			return '<div class="rg-range-picker">' +
+			return '<div class="rg-range-picker" ng-class="{\'rg-range-picker-vertical\':vertical}">' +
                         '<div class="rg-range-picker-box well" ng-class="{ \'only-calendars\': !data.hasTimeSliders, \'only-slider\': !data.hasDatePickers }">' +
                             '<div class="rg-range-picker-calendars" ng-show="data.hasDatePickers">' +
                                 '<div class="rg-range-picker-calendar-box">' +
