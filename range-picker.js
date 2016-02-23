@@ -215,7 +215,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             }
 		},
 
-		controller: function($scope, $element, $attrs) {
-		}
+		controller: ["$scope", "$element", "$attrs", function($scope, $element, $attrs) {
+		}]
 	};
 }]);
