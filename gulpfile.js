@@ -9,8 +9,12 @@
         gulp.start('build');
     });
 
-    gulp.task('build', function() {
+    gulp.task('build', ['bower'], function() {
 
+    });
+
+    gulp.task('bower', function() {
+        return plugins.bower();
     });
 
     gulp.task('clean', function() {

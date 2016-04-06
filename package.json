@@ -4,7 +4,7 @@
   "description": "A datetime picker for range between two calendars and time sliders",
   "main": "range-picker.js",
   "scripts": {
-    "start": "npm install; gulp",
+    "start": "npm install; bower install; gulp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -25,6 +25,7 @@
   "devDependencies": {
     "del": "^2.2.0",
     "gulp": "^3.9.1",
+    "gulp-bower": "0.0.13",
     "gulp-load-plugins": "^1.2.0"
   }
 }
