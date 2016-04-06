@@ -1,0 +1,8 @@
+{
+  "preset": "google",
+  "validateIndentation": 4,
+  "disallowMixedSpacesAndTabs": true,
+  "maximumLineLength": 120,
+  "disallowTrailingWhitespace": true,
+  "excludeFiles": ["dist/*"]
+}
