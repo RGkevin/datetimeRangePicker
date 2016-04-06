@@ -4,7 +4,10 @@
   "authors": [
     "Kevin Eduardo <rgkevin.lopez@gmail.com>"
   ],
-  "main": "range-picker.js",
+  "main": [
+    "dist/range-picker.js",
+    "dist/range-picker.css"
+  ],
   "description": "A datetime picker for range between two calendars and time sliders ",
   "keywords": [
     "calendar",
