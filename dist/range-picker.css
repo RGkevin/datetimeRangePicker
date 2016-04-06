@@ -5,7 +5,7 @@
 .rg-range-picker .rg-range-picker-box {
   width: 100%;
   padding: 0;
-  background-color: #ffffff;
+  background-color: #fff;
 }
 .rg-range-picker .rg-range-picker-calendars {
   border-bottom: solid 1px #ededed;
@@ -64,7 +64,7 @@
   background-color: transparent !important;
 }
 .clean-calendar > table .text-info {
-  color: #ffffff;
+  color: #fff;
 }
 .clean-calendar .btn {
   border-width: 0;
@@ -100,7 +100,7 @@
   position: relative;
   top: -10.5px;
   border: solid 1px #ededed;
-  background-color: #ffffff;
+  background-color: #fff;
   color: #5cb85c;
   font-weight: 300;
   font-size: 12px;
@@ -110,7 +110,7 @@
 }
 .label.label-range-picker {
   border: solid 1px #ededed;
-  background-color: #ffffff;
+  background-color: #fff;
   color: #666666;
   font-weight: 300;
   border-radius: 14px;
@@ -155,7 +155,7 @@
 }
 .clean-slider .pointer.low,
 .clean-slider .pointer.high {
-  background-color: #ffffff;
+  background-color: #fff;
   width: 20px;
   height: 20px;
   text-indent: -999px;
