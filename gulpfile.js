@@ -11,9 +11,7 @@
         gulp.start('build');
     });
 
-    gulp.task('build', ['styles', 'scripts'], function() {
-
-    });
+    gulp.task('build', ['styles', 'scripts']);
 
     gulp.task('styles', ['bower'], function() {
         return gulp.src('src/**/*.less')
@@ -59,7 +57,7 @@
     });
 
     gulp.task('test', function() {
-        console.log(plugins);
+        // TODO: Add tests
     });
 
     gulp.task('watch', function() {
