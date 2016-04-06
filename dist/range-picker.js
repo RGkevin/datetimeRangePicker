@@ -1,25 +1,3 @@
-/**
-@toc
-
-@param {Object} scope (attrs that must be defined on the scope (i.e. in the controller) - they can't just be defined in the partial html). REMEMBER: use snake-case when setting these on the partial!
-TODO
-
-@param {Object} attrs REMEMBER: use snake-case when setting these on the partial! i.e. my-attr='1' NOT myAttr='1'
-TODO
-
-@dependencies
-TODO
-
-@usage
-partial / html:
-TODO
-
-controller / js:
-TODO
-
-//end: usage
-*/
-
 'use strict';
 
 angular
@@ -36,7 +14,8 @@ angular
             var minutes = (input - (hours * 60)) < 10 ? '0' + (input - (hours * 60)) : input - (hours * 60);
             var meridian = type ? ':00' : (hours >= 12 && hours !== 24 ? ' pm' : ' am');
 
-            return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0' : '') + (hours - 12)) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
+            return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0' : '') +
+                (hours - 12)) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
         };
     }])
     .directive('rgRangePicker', ['$compile', '$timeout', '$filter', function($compile, $timeout, $filter) {
@@ -71,6 +50,7 @@ angular
                     }
                 }*/
 
+                // jscs:disable maximumLineLength
                 return '<div class="rg-range-picker" ng-class="{\'rg-range-picker-vertical\':vertical}">' +
                             '<div class="rg-range-picker-box well" ng-class="{ \'only-calendars\': !data.hasTimeSliders, \'only-slider\': !data.hasDatePickers }">' +
                                 '<div class="rg-range-picker-calendars" ng-show="data.hasDatePickers">' +
@@ -94,13 +74,18 @@ angular
                                 '</div>' +
                             '</div>' +
                         '</div>';
+                // jscs:enable maximumLineLength
             },
 
             link: function(scope, element, attrs) {
                 // define labels
-                var sliderMinWidth      = 400; // if directive is less width than 500, then display responsive version
-                var sliderContainer     = angular.element('#rgRangePickerSliderContainer', element[0]);
-                var slider              = angular.element('<div slider class="clean-slider" ng-model="data.time.from" ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>');
+                var sliderMinWidth = 400; // if directive is less width than 500, then display responsive version
+                var sliderContainer = angular.element('#rgRangePickerSliderContainer', element[0]);
+                var sliderPartial = '<div slider class="clean-slider" ng-model="data.time.from" ' +
+                        'ng-model-range="data.time.to" floor="{{data.time.dFrom}}" ceiling="{{data.time.dTo}}" ' +
+                        'buffer="{{data.time.minRange || 1}}" step="{{data.time.step || 1}}" ' +
+                        'step-width="{{data.time.step || 1}}" precision="0" stretch="3"></div>';
+                var slider = angular.element(sliderPartial);
                 var sliderAlreadyRender = false;
                 var defaultLabels = {
                     date: {
@@ -192,15 +177,22 @@ angular
                 /**
                  * Max Range Date functionality
                  */
-                var maxRange = ((scope.maxRangeDate && scope.maxRangeDate - 1) || 0) * 86400000; // 86400000 miliseconds a day
-                var superMaxDate = scope.data.date && scope.data.date.max && scope.data.date.max.getTime(); // miliseconds
-                var superMinDate = scope.data.date && scope.data.date.min && scope.data.date.min.getTime(); // miliseconds
+                // 86400000 miliseconds a day
+                var maxRange = ((scope.maxRangeDate && scope.maxRangeDate - 1) || 0) * 86400000;
+                // miliseconds
+                var superMaxDate = scope.data.date && scope.data.date.max && scope.data.date.max.getTime();
+                // miliseconds
+                var superMinDate = scope.data.date && scope.data.date.min && scope.data.date.min.getTime();
 
                 function updateMinAndMaxDate() {
                     var currentRange = scope.data.date.to.getTime() - scope.data.date.from.getTime();
                     var offset = maxRange - currentRange;
-                    var _min = (scope.data.date.from.getTime() - offset) < superMinDate ? superMinDate : scope.data.date.from.getTime() - offset; // miliseconds
-                    var _max = (scope.data.date.to.getTime() + offset) > superMaxDate ? superMaxDate : (scope.data.date.to.getTime() + offset); // miliseconds
+                    // miliseconds
+                    var _min = (scope.data.date.from.getTime() - offset) < superMinDate ?
+                            superMinDate : scope.data.date.from.getTime() - offset;
+                    // miliseconds
+                    var _max = (scope.data.date.to.getTime() + offset) > superMaxDate ?
+                            superMaxDate : (scope.data.date.to.getTime() + offset);
 
                     // set min date
                     scope.data.date.min = new Date(_min);
