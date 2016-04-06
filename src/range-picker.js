@@ -23,13 +23,13 @@ TODO
 'use strict';
 
 angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
-    .filter('rgTime', [function () {
+    .filter('rgTime', [function() {
         /**
          * input should be a number of minutes to be parsed
          * @param {input} number of minutes
          * @param {type} true = 00:00:00 | false = 00:00 am or pm
          */
-        return function (input, type) {
+        return function(input, type) {
             var
                 hours = parseInt( input / 60, 10 ),
                 minutes = (input - (hours * 60)) < 10 ? '0' + (input - (hours * 60)) : input - (hours * 60),
@@ -38,7 +38,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
         };
     }])
-    .directive('rgRangePicker', [ '$compile', '$timeout', '$filter', function ($compile, $timeout, $filter) {
+    .directive('rgRangePicker', ['$compile', '$timeout', '$filter', function($compile, $timeout, $filter) {
 
     return {
         restrict: 'A',
@@ -136,26 +136,26 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 scope.data.time = angular.extend(timeDefaults, scope.data.time);
             }
 
-            function renderSlider () {
-                if(!sliderAlreadyRender && scope.data.hasTimeSliders) {
-                    sliderContainer.append( slider );
-                    $compile( slider )( scope );
+            function renderSlider() {
+                if (!sliderAlreadyRender && scope.data.hasTimeSliders) {
+                    sliderContainer.append(slider);
+                    $compile(slider)(scope);
                     sliderAlreadyRender = true;
 
                     /**
                      * Responsive fix
                      */
-                    if ( element.width() <= sliderMinWidth ) {
-                        angular.element( '.rg-range-picker', element[0]).addClass('rg-range-picker-responsive');
+                    if (element.width() <= sliderMinWidth) {
+                        angular.element('.rg-range-picker', element[0]).addClass('rg-range-picker-responsive');
                     }
                 }
             }
 
-            if ( attrs.collapse ) {
-                scope.$watch( function() {
+            if (attrs.collapse) {
+                scope.$watch(function() {
                     return element[0].className;
                 }, function() {
-                    if(element.hasClass('in')) {
+                    if (element.hasClass('in')) {
                         // render slider
                         renderSlider();
                     }
@@ -167,24 +167,24 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             /**
              * Trigger event when user change slide range
              */
-            function timeChanges (newValue, oldValue) {
-                if ( !angular.isUndefined(timeChangePromise) ) {
+            function timeChanges(newValue, oldValue) {
+                if (!angular.isUndefined(timeChangePromise)) {
                     $timeout.cancel(timeChangePromise);
-
                 }
-                if ( newValue !== oldValue ) {
-                    timeChangePromise = $timeout( function(){
+
+                if (newValue !== oldValue) {
+                    timeChangePromise = $timeout(function() {
 
                         scope.onTimeChange()({
                             from: $filter('rgTime')(scope.data.time.from, true),
                             to: $filter('rgTime')(scope.data.time.to, true),
-                            range: $filter('rgTime')( scope.data.time.to - scope.data.time.from , true)
+                            range: $filter('rgTime')(scope.data.time.to - scope.data.time.from, true)
                         });
 
                     }, 500);
                 }
             }
-            if ( !angular.isUndefined(scope.onTimeChange()) && scope.data.hasTimeSliders ) {
+            if (!angular.isUndefined(scope.onTimeChange()) && scope.data.hasTimeSliders) {
                 scope.$watch('data.time.from', timeChanges);
                 scope.$watch('data.time.to', timeChanges);
             }
@@ -209,7 +209,7 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 scope.data.date.max = new Date(_max);
             }
 
-            if ( scope.maxRangeDate && scope.data.hasDatePickers ) {
+            if (scope.maxRangeDate && scope.data.hasDatePickers) {
                 scope.$watch('data.date.from', updateMinAndMaxDate);
                 scope.$watch('data.date.to', updateMinAndMaxDate);
             }
