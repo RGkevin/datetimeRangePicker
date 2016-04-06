@@ -3,6 +3,7 @@
 
     var del = require('del');
     var gulp = require('gulp');
+    var plugins = require('gulp-load-plugins')();
 
     gulp.task('default', ['clean'], function() {
         gulp.start('build');
