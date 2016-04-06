@@ -1,0 +1,28 @@
+{
+  "name": "datetime-range-picker",
+  "version": "1.3.0",
+  "description": "A datetime picker for range between two calendars and time sliders",
+  "main": "range-picker.js",
+  "scripts": {
+    "start": "npm install;",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skoblenick/datetimeRangePicker.git"
+  },
+  "author": "Kevin Eduardo <rgkevin.lopez@gmail.com>",
+  "contributors": [
+    "Miguel Rodrigo Chacon Lemus <mmrchacon92@gmail.com>",
+    "Carlos Hernández <learner.cys@gmail.com>",
+    "Ryan Skoblenick <ryan@skoblenick.com>"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/skoblenick/datetimeRangePicker/issues"
+  },
+  "homepage": "https://github.com/skoblenick/datetimeRangePicker#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
+}
