@@ -9,8 +9,22 @@
         gulp.start('build');
     });
 
-    gulp.task('build', ['bower'], function() {
+    gulp.task('build', ['styles'], function() {
 
+    });
+
+    gulp.task('styles', ['bower'], function() {
+        return gulp.src('src/**/*.less')
+            .pipe(plugins.sourcemaps.init())
+            .pipe(plugins.less())
+            .pipe(gulp.dest('dist'))
+            .pipe(plugins.cleanCss())
+            .pipe(plugins.concat('range-picker.min.css'))
+            .pipe(plugins.sourcemaps.write('./', {
+                includeContent: false,
+                sourceRoot: './'
+            }))
+            .pipe(gulp.dest('dist'));
     });
 
     gulp.task('bower', function() {
