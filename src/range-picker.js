@@ -40,19 +40,19 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
     }])
     .directive('rgRangePicker', [ '$compile', '$timeout', '$filter', function ($compile, $timeout, $filter) {
 
-	return {
-		restrict: 'A',
-		scope: {
+    return {
+        restrict: 'A',
+        scope: {
             data: '=rgRangePicker',
             labels: '=',
             onTimeChange: '&',
             maxRangeDate: '=', // in days
             vertical : '='
-		},
+        },
 
-		// replace: true,
-		template: function(/*element, attrs*/) {
-			/*var defaultsAttrs ={
+        // replace: true,
+        template: function(/*element, attrs*/) {
+            /*var defaultsAttrs ={
                 data: {
                     date: {
                         from: new Date(),
@@ -63,14 +63,14 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                         to: 1440 // minutes in a day
                     }
                 }
-			};
-			for(var xx in defaultsAttrs) {
-				if(attrs[xx] ===undefined) {
-					attrs[xx] =defaultsAttrs[xx];
-				}
-			}*/
+            };
+            for(var xx in defaultsAttrs) {
+                if(attrs[xx] ===undefined) {
+                    attrs[xx] =defaultsAttrs[xx];
+                }
+            }*/
 
-			return '<div class="rg-range-picker" ng-class="{\'rg-range-picker-vertical\':vertical}">' +
+            return '<div class="rg-range-picker" ng-class="{\'rg-range-picker-vertical\':vertical}">' +
                         '<div class="rg-range-picker-box well" ng-class="{ \'only-calendars\': !data.hasTimeSliders, \'only-slider\': !data.hasDatePickers }">' +
                             '<div class="rg-range-picker-calendars" ng-show="data.hasDatePickers">' +
                                 '<div class="rg-range-picker-calendar-box">' +
@@ -93,9 +93,9 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                             '</div>' +
                         '</div>' +
                     '</div>';
-		},
+        },
 
-		link: function(scope, element, attrs) {
+        link: function(scope, element, attrs) {
             // define labels
             var
                 sliderMinWidth      = 400,// if directive is less width than 500, then display responsive version
@@ -213,9 +213,9 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
                 scope.$watch('data.date.from', updateMinAndMaxDate);
                 scope.$watch('data.date.to', updateMinAndMaxDate);
             }
-		},
+        },
 
-		controller: function($scope, $element, $attrs) {
-		}
-	};
+        controller: function($scope, $element, $attrs) {
+        }
+    };
 }]);
