@@ -57,7 +57,15 @@
     gulp.task('clean', function() {
         return del('dist/*');
     });
+
     gulp.task('test', function() {
         console.log(plugins);
     });
+
+    gulp.task('watch', function() {
+        gulp.watch('src/**/*.js', ['scripts']);
+        gulp.watch('src/**/*.less', ['styles']);
+        gulp.watch('bower.json', ['bower']);
+    });
+
 })(require);
