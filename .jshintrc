@@ -67,5 +67,7 @@
   "worker"        : false,
   "wsh"           : false,
   "yui"           : false,
-  "globals"       : {}
+  "globals"       : {
+    "angular": true
+  }
 }
