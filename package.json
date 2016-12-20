@@ -17,8 +17,7 @@
     "ui"
   ],
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "angular": "~1.2.0",
     "angular-animate": "~1.2.0",
     "angular-sanitize": "~1.2.0",
