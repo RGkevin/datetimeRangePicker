@@ -1,14 +1,19 @@
 {
-  "author": "Kevin Eduardo <rgkevin.lopez@gmail.com>",
-  "name": "datetimeRangePicker",
-  "description": "A datetime picker for range between two calendars and time sliders ",
+  "name": "datetime-range-picker",
+  "version": "1.3.1",
   "main":"range-picker.js",
-  "version": "1.3.0",
+  "description": "A datetime picker for range between two calendars and time sliders ",
   "homepage": "https://github.com/RGkevin/datetimeRangePicker",
   "repository": {
     "type": "git",
     "url": "https://github.com/RGkevin/datetimeRangePicker"
   },
+  "author": "Kevin Eduardo <rgkevin.lopez@gmail.com>",
+  "contributors": [
+    "Miguel Chacon <mmrchacon92@gmail.com>",
+    "Carlos Hernandez <learnercys@gmail.com>",
+    "Nick Tsitlakidis <nick@nicktsitlakidis.com>"
+  ],
   "keywords": [
     "calendar",
     "angular",
