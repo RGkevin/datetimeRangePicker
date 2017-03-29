@@ -38,12 +38,13 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
             return (!type && hours > 12 ? (hours === 24 ? '00' : (hours - 12 < 10 ? '0': '' ) + (hours - 12) ) : (hours < 10 ? '0' : '') + hours) + ':' + minutes + meridian;
         };
     }])
-    .directive('rgRangePicker', [ '$compile', '$timeout', '$filter', function ($compile, $timeout, $filter) {
+    .directive('rgRangePicker', [ '$compile', '$timeout', '$filter', '$document', function ($compile, $timeout, $filter, $document) {
 
 	return {
 		restrict: 'A',
 		scope: {
             data: '=rgRangePicker',
+            collapse: '=?',
             labels: '=',
             onTimeChange: '&',
             maxRangeDate: '=', // in days
@@ -216,6 +217,26 @@ angular.module('rgkevin.datetimeRangePicker', ['vr.directives.slider'])
 		},
 
 		controller: ["$scope", "$element", "$attrs", function($scope, $element, $attrs) {
+			$scope.$watch('collapse', function (newValue, oldValue) {
+			    if (!newValue) {
+				$timeout(function () {
+				    $document.on('click', documentClickBind)
+				})
+			    } else {
+				$document.off('click', documentClickBind)
+			    }
+			})
+
+
+			function documentClickBind(event) {
+			    if ($scope.collapse) return
+			    var isContainsElement = event.target.contains($element[0]);
+			    if (isContainsElement) {
+				$scope.$apply(function () {
+				    $scope.collapse = true;
+				});
+			    }
+			}
 		}]
 	};
 }]);
